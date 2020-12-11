@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+
+  falcon:
+    container_name: falcon
+    build: .
+    command: sh -c "uwsgi uwsgi.ini"
+    volumes:
+      - .:/code
+    ports:
+      - "3031:3031"
+      - "9191:9191"
+    environment:
+      - PYTHONUNBUFFERED=1
+      - PYTHONDONTWRITEBYTECODE=1
+      - PYTHONDEVMODE=1
