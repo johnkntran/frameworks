@@ -2,8 +2,8 @@ version: '3'
 
 services:
 
-  falcon:
-    container_name: falcon
+  falcon_web:
+    container_name: falcon_web
     build: .
     command: sh -c "uwsgi uwsgi.ini"
     volumes:
@@ -15,3 +15,14 @@ services:
       - PYTHONUNBUFFERED=1
       - PYTHONDONTWRITEBYTECODE=1
       - PYTHONDEVMODE=1
+
+  nginx:
+    container_name: falcon_nginx
+    image: nginx:stable-alpine
+    restart: always
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - falcon_web
