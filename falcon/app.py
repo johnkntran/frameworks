@@ -16,11 +16,17 @@ class AppResource(object):
                      '\n\n'
                      '    ~ Immanuel Kant')
 
+class QueryResource:
+    def on_get(self, req, resp, query):
+        resp.data = bytes(query, 'utf8')
+
 # falcon.API instances are callable WSGI apps
 app = falcon.API()
 
 # Resources are represented by long-lived class instances
 resource = AppResource()
+query = QueryResource()
 
 # things will handle all requests to the '/things' URL path
 app.add_route('/', resource)
+app.add_route('/{query}', query)
