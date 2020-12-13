@@ -15,7 +15,7 @@ async def index(request):
     return text(f"{request.remote_addr or None} connected to {request.url_for('index')}\nForwarded: {request.forwarded}")
 
 @app.get('/db/<person_id>')
-async def index(request, person_id):
+async def db(request, person_id):
     async with Database('postgresql://postgres:postgres@postgres:5432/postgres') as database:
         row = await database.fetch_one(query='SELECT * FROM people WHERE id = :person_id;', values={'person_id': int(person_id)})
         return json(dict(row.items()))
