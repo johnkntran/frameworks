@@ -51,7 +51,7 @@ app.add_route('/db', db)
 app.add_route('/db/{people_id}', db)
 
 def load_data():
-    connection = psycopg2.connect('host=postgres dbname=postgres user=postgres password=postgres');
+    connection = psycopg2.connect('host=postgres dbname=postgres user=postgres password=postgres')
     with connection.cursor() as cursor:
         cursor.execute('DROP TABLE IF EXISTS people;')
         cursor.execute('CREATE TABLE people (id SERIAL PRIMARY KEY, name VARCHAR, age INTEGER);')
