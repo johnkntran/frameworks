@@ -55,9 +55,9 @@ def load_data():
     with connection.cursor() as cursor:
         cursor.execute('DROP TABLE IF EXISTS people;')
         cursor.execute('CREATE TABLE people (id SERIAL PRIMARY KEY, name VARCHAR, age INTEGER);')
-        cursor.execute("INSERT INTO people(id, name, age) VALUES (1, 'John', 31) ON CONFLICT (id) DO NOTHING;")
-        cursor.execute("INSERT INTO people(id, name, age) VALUES (2, 'Kim', 29) ON CONFLICT (id) DO NOTHING;")
-        cursor.execute("INSERT INTO people(id, name, age) VALUES (3, 'Jim', 34) ON CONFLICT (id) DO NOTHING;")
+        cursor.execute("INSERT INTO people(id, name, age) VALUES (%s, %s, %s) ON CONFLICT (id) DO NOTHING;", (1, 'John', 31))
+        cursor.execute("INSERT INTO people(id, name, age) VALUES (%s, %s, %s) ON CONFLICT (id) DO NOTHING;", (2, 'Kim', 29))
+        cursor.execute("INSERT INTO people(id, name, age) VALUES (%s, %s, %s) ON CONFLICT (id) DO NOTHING;", (3, 'Jim', 34))
         cursor.execute("SELECT * FROM people;")
         res = cursor.fetchall()
     connection.commit()
