@@ -21,7 +21,7 @@ async def db(request, person_id):
         return json(dict(row.items()))
 
 async def load_data():
-     async with Database('postgresql://postgres:postgres@postgres:5432/postgres') as database:
+    async with Database('postgresql://postgres:postgres@postgres:5432/postgres') as database:
         execution = await database.execute(query='DROP TABLE IF EXISTS people;')
         execution = await database.execute(query='CREATE TABLE people (id SERIAL PRIMARY KEY, name VARCHAR, age INTEGER);')
         execution = await database.execute_many(query='INSERT INTO people(id, name, age) VALUES (:id, :name, :age) ON CONFLICT (id) DO NOTHING;', values=[
