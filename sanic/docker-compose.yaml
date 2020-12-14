@@ -26,14 +26,14 @@ services:
       - sanic_web
 
   postgres:
-    container_name: sanic_postgres
+    container_name: frameworks_postgres
     image: postgres:latest
     volumes:
-      - sanic_postgres:/var/lib/postgresql/data
+      - frameworks_postgres:/var/lib/postgresql/data
     environment:
       POSTGRES_USER: postgres
       POSTGRES_DB: postgres
       POSTGRES_PASSWORD: postgres
 
 volumes:
-  sanic_postgres:
+  frameworks_postgres:

@@ -33,4 +33,4 @@ async def load_data():
         return rows
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=1337, access_log=False, debug=False)
+    app.run(host='0.0.0.0', port=1337, workers=4, access_log=False, debug=False)

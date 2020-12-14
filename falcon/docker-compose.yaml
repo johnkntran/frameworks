@@ -27,14 +27,14 @@ services:
       - falcon_web
 
   postgres:
-    container_name: falcon_postgres
+    container_name: frameworks_postgres
     image: postgres:latest
     volumes:
-      - falcon_postgres:/var/lib/postgresql/data
+      - frameworks_postgres:/var/lib/postgresql/data
     environment:
       POSTGRES_USER: postgres
       POSTGRES_DB: postgres
       POSTGRES_PASSWORD: postgres
 
 volumes:
-  falcon_postgres:
+  frameworks_postgres:
