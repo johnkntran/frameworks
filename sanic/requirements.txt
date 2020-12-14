@@ -1,2 +1,3 @@
 sanic
 databases[postgresql]
+asyncpg

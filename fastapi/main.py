@@ -2,7 +2,7 @@ from typing import Optional
 
 from fastapi import FastAPI
 from pydantic import BaseModel
-from databases import Database
+import asyncpg
 
 app = FastAPI()
 
@@ -25,11 +25,16 @@ async def update_item(item_id: int, item: Item):
 
 @app.get('/db/{person_id}')
 async def db(person_id: int):
-    async with Database('postgresql://postgres:postgres@postgres:5432/postgres') as database:
-        row = await database.fetch_one(query='SELECT * FROM people WHERE id = :person_id;', values={'person_id': int(person_id)})
-        return dict(row.items())
+    # async with Database('postgresql://postgres:postgres@postgres:5432/postgres') as database:
+    #     row = await database.fetch_one(query='SELECT * FROM people WHERE id = :person_id;', values={'person_id': person_id})
+    #     return dict(row.items())
+    connection = await asyncpg.connect(user='postgres', password='postgres', database='postgres', host='postgres')
+    record = await connection.fetchrow('SELECT * FROM people WHERE id = $1;', person_id)
+    await connection.close()
+    return dict(record.items())
 
 async def load_data():
+    from databases import Database
     async with Database('postgresql://postgres:postgres@postgres:5432/postgres') as database:
         execution = await database.execute(query='DROP TABLE IF EXISTS people;')
         execution = await database.execute(query='CREATE TABLE people (id SERIAL PRIMARY KEY, name VARCHAR, age INTEGER);')

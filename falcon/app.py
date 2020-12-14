@@ -13,10 +13,7 @@ class AppResource(object):
     def on_get(self, req, resp):
         """Handles GET requests"""
         resp.status = falcon.HTTP_200  # This is the default status
-        resp.body = ('Two things awe me most, the starry sky '
-                     'above me and the moral law within me.'
-                     '\n\n'
-                     '    ~ Immanuel Kant')
+        resp.body = ('{"msg": "Hello, World!"}')
 
 class ParamResource:
     def on_get(self, req, resp, query):
@@ -61,4 +58,5 @@ def load_data():
         cursor.execute("SELECT * FROM people;")
         res = cursor.fetchall()
     connection.commit()
+    connection.close()
     return res
