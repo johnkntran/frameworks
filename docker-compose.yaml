@@ -18,7 +18,7 @@ services:
   fastapi_web:
     container_name: fastapi_web
     build: ./fastapi
-    command: sh -c "uvicorn --host 0.0.0.0 --port 8000 --workers 6 main:app"
+    command: sh -c "uvicorn --host 0.0.0.0 --port 8000 --workers 6 --no-access-log main:app"
     volumes:
       - ./fastapi:/code
     ports:
@@ -61,6 +61,11 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_DB: postgres
       POSTGRES_PASSWORD: postgres
+
+  go:
+    container_name: go
+    image: golang:latest
+    command: sh -c "sleep 10000"
 
 volumes:
   frameworks_postgres:

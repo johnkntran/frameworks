@@ -1,4 +1,3 @@
 fastapi
 uvicorn
-databases[postgresql]
 asyncpg
