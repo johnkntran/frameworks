@@ -7,7 +7,7 @@ app = FastAPI()
 
 @app.get('/')
 async def root():
-    return {'message': 'Hello, World!'}
+    return {'message': 'Hello, from FastAPI!'}
 
 @app.get('/db/{person_id}')
 async def db(person_id: int):

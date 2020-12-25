@@ -13,7 +13,7 @@ class AppResource(object):
     def on_get(self, req, resp):
         """Handles GET requests"""
         resp.status = falcon.HTTP_200  # This is the default status
-        resp.body = '{"message": "Hello, World!"}'
+        resp.body = '{"message": "Hello, from Falcon!"}'
 
 class DBResource:
     def on_get(self, req, resp, people_id):

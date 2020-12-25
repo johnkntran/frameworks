@@ -6,7 +6,7 @@ app = Sanic()
 
 @app.route('/')
 async def root(request):
-    return json({'message': 'Hello, World!'})
+    return json({'message': 'Hello, from Sanic!'})
 
 @app.get('/db/<person_id>')
 async def db(request, person_id):
